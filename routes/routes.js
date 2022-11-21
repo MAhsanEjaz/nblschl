@@ -42,7 +42,7 @@ class userController{
 
                         const token = jsonwebtoken.sign({userID: saveUser._id},"dhsjf3423jhsdf3423df",{expiresIn: "5d"})
 
-                        res.status(201).send({"message": "Ok ho gya", "token": token})
+                        res.status(201).send({"message": "Ok ho gya", "token": token,"email": email,"role": role})
 
 
                     }catch(err){
