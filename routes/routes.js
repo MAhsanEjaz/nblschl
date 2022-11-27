@@ -24,8 +24,8 @@ app.post('/post', (req, res)=>{
 
 
 
-app.get("/",async (req, res, next) => {
-   await post.find()
+app.get("/", (req, res, next) => {
+    post.find()
       .select("name price _id productImage")
       .exec()
       .then(docs => {
