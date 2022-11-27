@@ -17,10 +17,46 @@ app.post('/post', (req, res)=>{
 })
 
 
-app.get('',async(req, res)=>{
-    const data = await post.find({})
-res.json(data)
-})
+// app.get('',async(req, res)=>{
+//     const data = await post.find({})
+// res.json(data)
+// })
+
+
+
+app.get("/", (req, res, next) => {
+    post.find()
+      .select("name price _id productImage")
+      .exec()
+      .then(docs => {
+        const response = {
+          count: docs.length,
+          data: docs.map(doc => {
+            return {
+              title: doc.title,
+              _id: doc._id,
+              request: {
+                type: "GET",
+                url: "http://localhost:3000/products/" + doc._id
+              }
+            };
+          })
+        };
+        //   if (docs.length >= 0) {
+        res.status(200).json(response);
+        //   } else {
+        //       res.status(404).json({
+        //           message: 'No entries found'
+        //       });
+        //   }
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({
+          error: err
+        });
+      });
+  });
 
 
 
