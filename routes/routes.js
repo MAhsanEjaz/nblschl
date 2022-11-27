@@ -36,7 +36,7 @@ app.get("/", (req, res, next) => {
               title: doc.title,
               request: {
                 title: doc.title,
-                type: "GET",
+                type: doc.title,
                 // url: "http://localhost:3000/products/" + doc._id
               }
             };
