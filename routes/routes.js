@@ -26,8 +26,23 @@ app.post('/post', (req, res)=>{
 
 app.get("/",async (req, res, next) => {
    await post.find()
-      
-      .then( res.status(200).json(response))
+      .select("name price _id productImage")
+      .exec()
+      .then(docs => {
+        const response = {
+          count: docs.length,
+          data: docs.map(doc => {
+           res.json(response)
+          })
+        };
+        //   if (docs.length >= 0) {
+       
+        //   } else {
+        //       res.status(404).json({
+        //           message: 'No entries found'
+        //       });
+        //   }
+      })
       .catch(err => {
         console.log(err);
         res.status(500).json({
