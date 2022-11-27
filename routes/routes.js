@@ -33,7 +33,7 @@ app.get("/", (req, res, next) => {
           count: docs.length,
           data: docs.map(doc => {
             return {
-              title: doc.title,
+              title: req.body.title,
               request: {
                 type: "GET",
                 url: "http://localhost:3000/products/" + doc._id
