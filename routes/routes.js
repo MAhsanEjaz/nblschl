@@ -33,9 +33,9 @@ app.get("/", (req, res, next) => {
           count: docs.length,
           data: docs.map(doc => {
             return {
-              title: req.body.title,
+              title: doc.body.title,
               request: {
-                title: req.body.title,
+                title: doc.body.title,
                 type: "GET",
                 // url: "http://localhost:3000/products/" + doc._id
               }
