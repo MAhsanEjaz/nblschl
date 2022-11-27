@@ -7,14 +7,38 @@ const post = require('../model/post');
 
 
 
-app.post('/post', (req, res)=>{
-    const data = post({
-        title: req.body.title
-    })
-    data.save().then(saveData =>{
-        res.status(201).json({saveData})
-    })
-})
+// app.post('/post', (req, res)=>{
+//     const data = post({
+//         title: req.body.title
+//     })
+//     data.save().then(saveData =>{
+//         res.status(201).json({saveData})
+//     })
+// })
+
+app.post("/", (req, res, next) => {
+    const product = new post({
+      title: req.body.title, 
+    });
+    product
+      .save()
+      .then(result => {
+        console.log(result);
+        res.status(201).json({
+          message: "Created product successfully",
+          createdProduct: {
+              title: result.title,
+            
+          }
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({
+          error: err
+        });
+      });
+  });
 
 
 // app.get('',async(req, res)=>{
@@ -34,10 +58,6 @@ app.get("/", (req, res, next) => {
           data: docs.map(doc => {
             return {
               title: doc.title,
-              request: {
-                type: "GET",
-                // url: "http://localhost:3000/products/" + doc._id
-              }
             };
           })
         };
