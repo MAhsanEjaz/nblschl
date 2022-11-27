@@ -37,7 +37,7 @@ app.get("/", (req, res, next) => {
               request: {
                 title: req.body.title,
                 type: "GET",
-                url: "http://localhost:3000/products/" + doc._id
+                // url: "http://localhost:3000/products/" + doc._id
               }
             };
           })
