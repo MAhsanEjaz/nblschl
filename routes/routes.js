@@ -57,7 +57,7 @@ app.get("/", (req, res, next) => {
           count: docs.length,
           data: docs.map(doc => {
             return {
-              title: doc.title,
+              title: req.title,
             };
           })
         };
