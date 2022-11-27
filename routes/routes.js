@@ -17,6 +17,12 @@ app.post('/post', (req, res)=>{
 })
 
 
+app.get('',async(req, res)=>{
+    const data = await post.find({})
+res.json(data)
+})
+
+
 
 class userController{
     static userRegistration = async (req, res)=>{
