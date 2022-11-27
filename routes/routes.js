@@ -50,14 +50,13 @@ app.post("/", (req, res, next) => {
 
 app.get("/", (req, res, next) => {
     post.find()
-      .select("name price _id productImage")
       .exec()
       .then(docs => {
         const response = {
           count: docs.length,
           data: docs.map(doc => {
             return {
-              title: doc.body.title,
+              title: doc.title,
             };
           })
         };
