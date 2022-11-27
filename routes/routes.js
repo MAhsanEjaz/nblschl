@@ -32,11 +32,17 @@ app.get("/",async (req, res, next) => {
         const response = {
           count: docs.length,
           data: docs.map(doc => {
-           res.json(response)
+            return {
+              title: doc.title,
+              request: {
+                type: "GET",
+                // url: "http://localhost:3000/products/" + doc._id
+              }
+            };
           })
         };
         //   if (docs.length >= 0) {
-       
+        res.status(200).json(response);
         //   } else {
         //       res.status(404).json({
         //           message: 'No entries found'
