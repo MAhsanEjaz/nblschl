@@ -24,22 +24,15 @@ app.post('/post', (req, res)=>{
 
 
 
-app.get("/", (req, res, next) => {
-    post.find()
+app.get("/",async (req, res, next) => {
+   await post.find()
       .select("name price _id productImage")
       .exec()
       .then(docs => {
         const response = {
           count: docs.length,
           data: docs.map(doc => {
-            return {
-              title: doc.title,
-              request: {
-                title: doc.title,
-                type: doc.title,
-                // url: "http://localhost:3000/products/" + doc._id
-              }
-            };
+           res.json(doc)
           })
         };
         //   if (docs.length >= 0) {
