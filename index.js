@@ -9,9 +9,9 @@ var url = "mongodb://localhost:27017/";
 app.get('/tahir',(req,res)=>{
     MongoClient.connect('mongodb+srv://tahir:tahir12345@cluster0.vdllyev.mongodb.net/?retryWrites=true&w=majority', function(err, db) {
         if (err) throw err;
-        var dbo = db.db("sample_mflix");
+        var dbo = db.db("sample_training");
         //Find all documents in the customers collection:
-        dbo.collection("comments").find({}).toArray(function(err, result) {
+        dbo.collection("routes").find({}).toArray(function(err, result) {
           if (err) throw err;
           console.log(result);
           db.close();
