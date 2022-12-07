@@ -24,14 +24,7 @@ app.get('/tahir',(req,res)=>{
 
 
 
-// app.get('/tahir',(req,res)=>{
-//     database.collection('tta').find({}).toArray(err, result =>{
-//         if(err){
-//             console.log('')
-//         }
-//         res.send(result);
-//     })
-// })
+
 
 mongoose.connect(process.env.DATABASE|| 'mongodb+srv://tahir:tahir12345@cluster0.vdllyev.mongodb.net/?retryWrites=true&w=majority',(err)=>{
     if(!err){
