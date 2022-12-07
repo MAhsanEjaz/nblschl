@@ -4,6 +4,26 @@ const bcrypt = require('bcrypt');
 const jsonwebtoken = require('jsonwebtoken');
 const userModel = require('../model/user');
 const post = require('../model/post');
+const data = require('../model/data');
+const stripe = require("stripe")(process.env.STRIPE_KEY);
+
+
+app.post("/payment", (req, res) => {
+  stripe.charges.create(
+    {
+      source: req.body.tokenId,
+      amount: req.body.amount,
+      currency: "usd",
+    },
+    (stripeErr, stripeRes) => {
+      if (stripeErr) {
+        res.status(500).json(stripeErr);
+      } else {
+        res.status(200).json(stripeRes);
+      }
+    }
+  );
+});
 
 
 
@@ -48,12 +68,13 @@ app.post("/", (req, res, next) => {
 
 
 
+
 app.get("/", (req, res, next) => {
     post.find()
       .exec()
       .then(docs => {
         const response = {
-          count: docs.length,
+          count: docs.length, 
           data: docs.map(doc => {
             return {
               title: doc.title,
@@ -71,6 +92,24 @@ app.get("/", (req, res, next) => {
         });
       });
   });
+
+
+app.get('',async(req, res)=>{
+  const myData =await data({
+
+    WorkloadI: req.body.WorkloadI,
+    CPUUtilization: req.body.CPUUtilization,
+    Networking_Average: req.body.Networking_Average,
+    MemoryUtilization_Average: req.body.MemoryUtilization_Average,
+    Final_Target: req.body.Final_Target
+
+  })
+  myData.save().then(ourData=>{
+    res.send.json(ourData);
+    res.status(200).json({"message": "Data Successful"});
+  })
+
+})
 
 
 
