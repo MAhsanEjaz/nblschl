@@ -7,11 +7,11 @@ var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/";
 
 app.get('/tahir',(req,res)=>{
-    MongoClient.connect(url, function(err, db) {
+    MongoClient.connect('mongodb+srv://tahir:tahir12345@cluster0.vdllyev.mongodb.net/?retryWrites=true&w=majority', function(err, db) {
         if (err) throw err;
-        var dbo = db.db("tahir");
+        var dbo = db.db("sample_mflix");
         //Find all documents in the customers collection:
-        dbo.collection("tta").find({}).toArray(function(err, result) {
+        dbo.collection("comments").find({}).toArray(function(err, result) {
           if (err) throw err;
           console.log(result);
           db.close();
