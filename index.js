@@ -2,13 +2,13 @@ const express = require('express');
 const bodyparser = require('body-parser');
 const mongoose = require('mongoose')
 const Router = require('./routes/routes');
-const e = require('express');
 const app = express();
 var MongoClient = require('mongodb').MongoClient;
 
+//fetch data from mongodb
 
 app.get('/tahir',(req,res)=>{
-    MongoClient.connect('mongodb+srv://tahir:tahir12345@cluster0.vdllyev.mongodb.net/?retryWrites=true&w=majority', function(err, db) {
+    MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         var dbo = db.db("tahir");
         //Find all documents in the customers collection:
@@ -22,18 +22,15 @@ app.get('/tahir',(req,res)=>{
 })
 
 
+//connect from mongodb
 
-
-
-
-mongoose.connect(process.env.DATABASE|| 'mongodb+srv://tahir:tahir12345@cluster0.vdllyev.mongodb.net/?retryWrites=true&w=majority',(err)=>{
+mongoose.connect(process.env.DATABASE|| 'mongodb://localhost:27017',(err)=>{
     if(!err){
         console.log('Connected')
     }else{
         console.log('Not Connected')
     }
 })
-
 
 
 
